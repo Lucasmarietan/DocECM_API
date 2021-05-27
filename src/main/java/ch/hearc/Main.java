@@ -5,10 +5,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.CDL;
 
 import java.io.*;
+import java.io.File;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -85,6 +89,15 @@ public class Main {
             String prettyJsonString = gson.toJson(je);
             System.out.println(prettyJsonString);
 
+
+            org.json.JSONArray jsonArray = new JSONArray();
+            jsonArray.put(data_obj);
+
+            StringBuilder sb = new StringBuilder().append(fileID).append(".csv");
+
+            File file = new File(sb.toString());
+            String csv = CDL.toString(jsonArray);
+            FileUtils.writeStringToFile(file, csv);
 
             // Fermeture de la connexion
             con.disconnect();
