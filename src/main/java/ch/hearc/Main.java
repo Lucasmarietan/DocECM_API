@@ -93,7 +93,7 @@ public class Main {
             org.json.JSONArray jsonArray = new JSONArray();
             jsonArray.put(data_obj);
 
-            StringBuilder sb = new StringBuilder().append(fileID).append(".csv");
+            StringBuilder sb = new StringBuilder().append(fileID).append("_").append("metadata").append(".csv");
 
             File file = new File(sb.toString());
             String csv = CDL.toString(jsonArray);
@@ -159,7 +159,7 @@ public class Main {
             con.disconnect();
 
             // PDF Reader
-            StringBuilder sb = new StringBuilder().append(fileID).append(".pdf");
+            StringBuilder sb = new StringBuilder().append(fileID).append("_").append("attachment").append(".pdf");
             OutputStream out = new FileOutputStream(sb.toString());
             out.write(java.util.Base64.getDecoder().decode(data_obj.get("File").toString()));
             out.close();
